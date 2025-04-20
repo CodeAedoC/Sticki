@@ -1,9 +1,8 @@
-import React from 'react';
+import React, { useState } from 'react';
 import CanvasBoard from '../components/CanvasBoard';
-import { useAppContext } from '../contexts/AppContext';
 
 function Home() {
-  const { color, setColor } = useAppContext();
+  const [color, setColor] = useState('#000000');
 
   return (
     <div className="p-4 flex flex-col items-center">
@@ -20,7 +19,7 @@ function Home() {
         />
       </div>
 
-      <CanvasBoard />
+      <CanvasBoard color={color} />
     </div>
   );
 }
