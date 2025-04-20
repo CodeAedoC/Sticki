@@ -1,4 +1,4 @@
-import { createClient, LiveList } from "@liveblocks/client";
+import { createClient, LiveList, LiveObject, LiveMap } from "@liveblocks/client";
 import { createRoomContext } from "@liveblocks/react";
 
 // // I created the Liveblocks client.
@@ -20,9 +20,20 @@ const client = createClient({
 //   isDrawing: boolean;
 // };
 
-// // Type Storage removed
+// // I defined the structure for a single sticky note using LiveObject
+// // This makes individual note properties observable and collaborative.
+// type Note = LiveObject<{
+//   x: number;
+//   y: number;
+//   text: string;
+//   fill: string; // Added a fill color property
+// }>;
+
+// // I updated the storage definition to include a LiveMap for notes.
+// // LiveMap allows mapping unique IDs to Note objects.
 // type Storage = {
-//   paths: LiveList<PathData>;
+//   paths: LiveList<LiveObject<{ color: string; points: Array<[number, number]> }>>; // Paths remain LiveObjects
+//   notes: LiveMap<string, Note>; // Map noteId -> Note (LiveObject)
 // };
 
 // // Type PathData removed
@@ -61,11 +72,12 @@ export const {
   useUpdateMyPresence,
   useStorage,
   useMutation,
+  useHistory, // I added the useHistory hook
   useOthers,
   useBroadcastEvent,
   useEventListener,
   /* ...all the other hooks you exported */
-} = createRoomContext/*<Presence, Storage, UserMeta, RoomEvent>*/(client); // // I commented out the explicit generics for clarity in JS.
+} = createRoomContext(client); // // I commented out the explicit generics for clarity in JS.
 
 // // Export type { PathData }; // Removed this line
 

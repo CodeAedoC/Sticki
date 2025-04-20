@@ -135,7 +135,7 @@ function CanvasBoard({ color }) {
         ref={canvasRef}
         width={800}
         height={600}
-        className={`bg-white border border-gray-400 shadow-md ${room.getStatus() === 'connected' ? 'cursor-crosshair' : 'cursor-wait'}`} // // Change cursor while connecting
+        className={`w-full h-full ${room.getStatus() === 'connected' ? 'cursor-crosshair' : 'cursor-wait'}`}
         onPointerDown={startDrawing}
         onPointerMove={draw}
         onPointerUp={stopDrawing}

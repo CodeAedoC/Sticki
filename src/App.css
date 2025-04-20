@@ -40,3 +40,31 @@
 .read-the-docs {
   color: #888;
 }
+
+.app-container {
+  min-height: 100vh;
+  /* background-color: #f3f4f6;  Removed as it's handled by body style */
+}
+
+.app-nav {
+  background-color: #2563eb; /* bg-blue-600 */
+  color: white;
+  padding: 1rem; /* p-4 */
+}
+
+.app-nav ul {
+  display: flex;
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  gap: 1rem; /* space-x-4 */
+}
+
+.app-nav a {
+  color: inherit;
+  text-decoration: none;
+}
+
+.app-nav a:hover {
+  text-decoration: underline;
+}
