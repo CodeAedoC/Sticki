@@ -560,13 +560,89 @@ textarea {
 }
 
 .chat-drag-handle {
-  padding: 0.5rem;
+  padding: 0.6rem 0.5rem; /* Adjust padding slightly */
   background-color: var(--bg-tertiary);
   color: var(--text-secondary);
   font-weight: 600;
   cursor: grab;
   text-align: center;
-  border-bottom: 1px solid var(--border-secondary);
+  position: relative;
+  flex-shrink: 0;
+  display: flex; /* Use flex for layout inside handle */
+  align-items: center;
+  justify-content: center;
+}
+
+.minimize-btn {
+  position: absolute;
+  right: 0.5rem;
+  top: 50%;
+  transform: translateY(-50%);
+  background: none;
+  border: none;
+  font-size: 1.5rem; /* Make expand/collapse icon larger */
+  cursor: pointer;
+  padding: 0.4rem; /* Increase padding */
+  color: var(--text-secondary);
+  line-height: 1;
+}
+
+.minimize-btn:hover {
+  color: var(--text-primary);
+}
+
+.notification-dot {
+  position: absolute;
+  top: -2px;
+  left: -2px;
+  width: 8px;
+  height: 8px;
+  background-color: #ef4444;
+  border-radius: 50%;
+  box-shadow: 0 0 0 2px var(--bg-chat);
+}
+
+/* Styles when minimized */
+.draggable-chat.minimized {
+  height: auto;
+  width: 56px;
+  height: 56px;
+  border-radius: 50%;
+  overflow: visible;
+  cursor: pointer;
+  align-items: center;
+  justify-content: center;
+  padding: 0;
+  background-color: var(--bg-tertiary);
+  box-shadow: 0 4px 8px var(--shadow-color);
+}
+
+.draggable-chat.minimized .chat-drag-handle {
+  padding: 0;
+  background-color: transparent;
+  border-bottom: none;
+  width: 100%;
+  height: 100%;
+  display: flex; /* Ensure flex is explicitly set */
+  justify-content: center;
+  align-items: center;
+  position: relative;
+}
+
+.chat-content-wrapper {
+  flex-grow: 1;
+  min-height: 0;
+  display: flex;
+  flex-direction: column;
+  box-shadow: inset 0 1px 3px rgba(0,0,0,0.08);
+  opacity: 1;
+  transition: opacity 0.2s ease;
+  border: 2px dashed red; /* TEMP: Debug border */
+}
+
+.draggable-chat.minimized .chat-content-wrapper {
+  display: none;
+  opacity: 0;
 }
 
 .chat-input-area {
@@ -624,17 +700,88 @@ textarea {
 /* Styles for the draggable chat */
 .draggable-chat {
   position: fixed;
-  top: 10px; /* TEMP: Hardcode position for debugging */
-  left: 10px; /* TEMP: Hardcode position for debugging */
   width: 280px;
-  height: 400px;
   background-color: var(--bg-chat);
   border: 1px solid var(--border-secondary);
-  border-radius: 0.5rem;
+  border-radius: 6px;
   box-shadow: 0 5px 15px var(--shadow-color);
-  z-index: 1000; /* Ensure it's above other content */
+  z-index: 9999; /* Increase z-index significantly */
   display: flex;
   flex-direction: column;
-  overflow: hidden; /* Hide overflow during drag */
+  overflow: hidden;
   color: var(--text-secondary);
+  transition: height 0.2s ease, width 0.2s ease, border-radius 0.2s ease, min-width 0.2s ease;
+}
+
+.mic-btn {
+  background-color: var(--button-secondary-bg);
+  color: var(--text-secondary);
+  padding: 0.5rem;
+  font-size: 1.2rem;
+  line-height: 1;
+}
+
+.mic-btn.listening {
+  background-color: #ef4444; /* Red background when listening */
+  color: white;
+  animation: pulse 1.5s infinite;
+}
+
+@keyframes pulse {
+  0% { box-shadow: 0 0 0 0 rgba(239, 68, 68, 0.7); }
+  70% { box-shadow: 0 0 0 10px rgba(239, 68, 68, 0); }
+  100% { box-shadow: 0 0 0 0 rgba(239, 68, 68, 0); }
+}
+
+/* Chat Error Message */
+.chat-error {
+  padding: 0.5rem 1rem;
+  background-color: #fee2e2; /* Light red background */
+  color: #b91c1c; /* Dark red text */
+  font-size: 0.8rem;
+  text-align: center;
+  border-bottom: 1px solid #fecaca;
+}
+
+body.dark .chat-error {
+  background-color: #450a0a; /* Dark red background */
+  color: #fecaca; /* Light red text */
+  border-bottom-color: #7f1d1d;
+}
+
+/* Transcript Length Display */
+.transcript-length-display {
+  padding: 0.2rem 1rem;
+  background-color: var(--bg-tertiary);
+  color: var(--text-tertiary);
+  font-size: 0.75rem;
+  text-align: center;
+  border-bottom: 1px solid var(--border-primary);
+}
+
+/* Style handle content (icon) when minimized */
+.draggable-chat.minimized .handle-content {
+  font-size: 1.8rem; /* Increase chat icon size */
+  color: var(--text-primary);
+  line-height: 1;
+  display: inline-block;
+}
+
+/* Hide minimize button and dot container when minimized */
+.draggable-chat.minimized .minimize-btn { /* Hide the expand/collapse button */
+  display: none;
+}
+
+.draggable-chat.minimized .handle-content { /* Ensure icon takes space */
+  font-size: 1.8rem; /* Increase chat icon size */
+  color: var(--text-primary);
+  line-height: 1;
+  /* Centering is handled by parent (.chat-drag-handle) */
+}
+
+.draggable-chat.minimized .minimize-btn,
+.draggable-chat.minimized .notification-dot {
+  /* Position dot relative to the handle circle */
+  top: 4px; /* Adjust as needed */
+  right: 4px; /* Adjust as needed */
 }
