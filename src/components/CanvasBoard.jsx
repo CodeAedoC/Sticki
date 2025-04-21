@@ -144,13 +144,16 @@ function CanvasBoard({ color }) {
       {/* Render cursors for other users */}
       {/* // I also check connection status before mapping others, although less critical here */}
       {room.getStatus() === 'connected' && others.map(({ connectionId, presence }) => {
-        if (presence.cursor) {
+        // Check for presence, cursor, and userInfo
+        if (presence && presence.cursor && presence.userInfo) {
           return (
             <Cursor
               key={connectionId}
               x={presence.cursor.x}
               y={presence.cursor.y}
-              color={presence.color}
+              // Get color and name from the userInfo object
+              color={presence.userInfo.color}
+              name={presence.userInfo.name}
             />
           );
         }

@@ -11,9 +11,25 @@ import { RoomProvider } from './liveblocks.config'
 import { LiveList, LiveMap } from "@liveblocks/client"
 import './App.css';
 
+// Helper function to generate a somewhat consistent color from a string (e.g., userId)
+function generateColorFromId(userId) {
+  if (!userId) return "#CCCCCC"; // Default grey if no ID
+  let hash = 0;
+  for (let i = 0; i < userId.length; i++) {
+    hash = userId.charCodeAt(i) + ((hash << 5) - hash);
+  }
+  const c = (hash & 0x00FFFFFF).toString(16).toUpperCase();
+  return "#" + "00000".substring(0, 6 - c.length) + c;
+}
+
 // Layout for protected routes needing Room Context
 function RoomLayout() {
   const { roomId } = useParams(); // Get roomId from URL
+  const { user } = useAuth(); // Get user info from AuthContext
+
+  // Determine user name and color
+  const userName = user?.email ? user.email.split('@')[0] : 'User';
+  const userColor = generateColorFromId(user?.id); // Generate color based on ID
 
   if (!roomId) {
     // Handle cases where roomId might be missing unexpectedly
@@ -25,7 +41,14 @@ function RoomLayout() {
   return (
     <RoomProvider
       id={roomId}
-      initialPresence={{ cursor: null, color: "#000000", isDrawing: false }}
+      initialPresence={{
+        cursor: null,
+        isDrawing: false,
+        userInfo: {
+          name: userName,
+          color: userColor,
+        },
+      }}
       initialStorage={{
         paths: new LiveList([]),
         notes: new LiveMap()
@@ -100,7 +123,7 @@ function App() {
             {theme === 'light' ? '🌙' : '☀️'}
           </button>
           <button onClick={signOut} className="btn logout-btn">
-            Logout ({user?.email})
+            Logout ({user?.email ? user.email.split('@')[0] : user?.email})
           </button>
         </nav>
       )}

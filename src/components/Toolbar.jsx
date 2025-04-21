@@ -1,15 +1,29 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { useHistory, useRoom, useMutation } from '../liveblocks.config';
 
 // Toolbar component receives necessary state and functions as props
 function Toolbar({ color, setColor, addNote }) {
   const history = useHistory();
   const room = useRoom();
+  const [copyStatus, setCopyStatus] = useState('Copy Link');
 
   // Clear canvas mutation can live here as it's a toolbar action
   const clearCanvas = useMutation(({ storage }) => {
     storage.get('paths').clear();
   }, []);
+
+  // Function to copy the current room link
+  const copyRoomLink = () => {
+    const currentUrl = window.location.href;
+    navigator.clipboard.writeText(currentUrl).then(() => {
+      setCopyStatus('Copied!');
+      setTimeout(() => setCopyStatus('Copy Link'), 2000); // Reset after 2 seconds
+    }).catch(err => {
+      console.error('Failed to copy link: ', err);
+      setCopyStatus('Failed!');
+      setTimeout(() => setCopyStatus('Copy Link'), 2000);
+    });
+  };
 
   return (
     <div className="toolbar">
@@ -72,6 +86,19 @@ function Toolbar({ color, setColor, addNote }) {
           disabled={room.getStatus() !== 'connected'}
         >
           Clear
+        </button>
+      </div>
+
+      <div className="toolbar-separator"></div>
+
+      {/* Share Group */}
+      <div className="toolbar-group">
+        <button
+          onClick={copyRoomLink}
+          className="btn btn-secondary share-link-btn"
+          title="Copy link to share this whiteboard"
+        >
+          🔗 {copyStatus}
         </button>
       </div>
     </div>

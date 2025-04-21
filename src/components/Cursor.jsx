@@ -15,14 +15,20 @@ const CursorSvg = ({ color }) => (
   </svg>
 );
 
-const Cursor = ({ x, y, color }) => {
+const Cursor = ({ x, y, color, name }) => {
+  // Default name if none provided (though it should be)
+  const displayName = name || 'User';
+
   return (
     <div
       style={{ position: 'absolute', left: 0, top: 0, transform: `translateX(${x}px) translateY(${y}px)` }}
-      className="pointer-events-none" 
+      className="cursor" // Use the existing cursor class for styling if needed
     >
       <CursorSvg color={color} />
-      <div style={{ backgroundColor: color, color: 'white', padding: '2px 4px', borderRadius: '2px', fontSize: '10px', whiteSpace: 'nowrap' }}>User Name</div>
+      {/* Use the displayName in the label div */}
+      <div className="cursor-label" style={{ backgroundColor: color /* Use the user's color for label bg */ }}>
+        {displayName}
+      </div>
     </div>
   );
 };

@@ -303,6 +303,12 @@ textarea {
   background-color: var(--button-secondary-hover-bg);
 }
 
+.share-link-btn {
+  /* Optional: Add specific styles if needed */
+  /* Example: Slightly different padding or icon spacing */
+  gap: 0.4rem; /* Adjust spacing between icon and text */
+}
+
 /* Whiteboard Container */
 .whiteboard-container {
   position: relative;
@@ -508,12 +514,14 @@ textarea {
   margin-top: 0.125rem;
 }
 
-/* Chat Sidebar */
+/* Chat Sidebar - Updated for Fixed Positioning */
 .chat-sidebar {
-  /* Styles for the draggable chat */
+  /* Styles for the fixed chat */
   position: fixed;
-  width: 280px; /* Maintain width */
-  height: 400px; /* Fixed height */
+  bottom: 20px; /* Adjust offset from bottom */
+  right: 20px;  /* Adjust offset from right */
+  width: 280px; /* Or desired width */
+  height: 400px; /* Or desired height */
   background-color: var(--bg-chat);
   border: 1px solid var(--border-secondary);
   border-radius: 0.5rem;
@@ -521,9 +529,23 @@ textarea {
   z-index: 1000; /* Ensure it's above other content */
   display: flex;
   flex-direction: column;
-  overflow: hidden; /* Hide overflow during drag */
+  overflow: hidden; /* Keep internal content scrollable */
   color: var(--text-secondary);
+  /* Removed transition properties related to minimize */
 }
+
+/* Simple Header Style */
+.chat-header {
+  padding: 0.6rem 1rem; /* Match old handle padding */
+  background-color: var(--bg-tertiary);
+  color: var(--text-secondary);
+  font-weight: 600;
+  text-align: center;
+  flex-shrink: 0; /* Prevent header from shrinking */
+  border-bottom: 1px solid var(--border-primary); /* Separator line */
+}
+
+/* Keep existing styles for messages, input area etc. */
 
 .chat-messages {
   flex-grow: 1;
@@ -559,74 +581,11 @@ textarea {
   margin-bottom: 0.15rem; /* Small space below name */
 }
 
-.chat-drag-handle {
-  padding: 0.6rem 0.5rem; /* Adjust padding slightly */
-  background-color: var(--bg-tertiary);
-  color: var(--text-secondary);
-  font-weight: 600;
-  cursor: grab;
-  text-align: center;
-  position: relative;
-  flex-shrink: 0;
-  display: flex; /* Use flex for layout inside handle */
-  align-items: center;
-  justify-content: center;
-}
-
-.minimize-btn {
-  position: absolute;
-  right: 0.5rem;
-  top: 50%;
-  transform: translateY(-50%);
-  background: none;
-  border: none;
-  font-size: 1.5rem; /* Make expand/collapse icon larger */
-  cursor: pointer;
-  padding: 0.4rem; /* Increase padding */
-  color: var(--text-secondary);
-  line-height: 1;
-}
-
-.minimize-btn:hover {
-  color: var(--text-primary);
-}
-
+.chat-drag-handle,
+.minimize-btn,
 .notification-dot {
-  position: absolute;
-  top: -2px;
-  left: -2px;
-  width: 8px;
-  height: 8px;
-  background-color: #ef4444;
-  border-radius: 50%;
-  box-shadow: 0 0 0 2px var(--bg-chat);
-}
-
-/* Styles when minimized */
-.draggable-chat.minimized {
-  height: auto;
-  width: 56px;
-  height: 56px;
-  border-radius: 50%;
-  overflow: visible;
-  cursor: pointer;
-  align-items: center;
-  justify-content: center;
-  padding: 0;
-  background-color: var(--bg-tertiary);
-  box-shadow: 0 4px 8px var(--shadow-color);
-}
-
-.draggable-chat.minimized .chat-drag-handle {
-  padding: 0;
-  background-color: transparent;
-  border-bottom: none;
-  width: 100%;
-  height: 100%;
-  display: flex; /* Ensure flex is explicitly set */
-  justify-content: center;
-  align-items: center;
-  position: relative;
+  /* These styles are no longer needed */
+  display: none; /* Or simply remove the rules */
 }
 
 .chat-content-wrapper {
@@ -636,13 +595,7 @@ textarea {
   flex-direction: column;
   box-shadow: inset 0 1px 3px rgba(0,0,0,0.08);
   opacity: 1;
-  transition: opacity 0.2s ease;
-  border: 2px dashed red; /* TEMP: Debug border */
-}
-
-.draggable-chat.minimized .chat-content-wrapper {
-  display: none;
-  opacity: 0;
+  /* Removed transition */
 }
 
 .chat-input-area {
