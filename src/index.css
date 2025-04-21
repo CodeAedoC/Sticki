@@ -785,3 +785,249 @@ body.dark .chat-error {
   top: 4px; /* Adjust as needed */
   right: 4px; /* Adjust as needed */
 }
+
+/* Login Page Styles */
+.login-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 80vh; /* Adjust as needed */
+}
+
+.login-box {
+  background-color: var(--bg-secondary);
+  padding: 2.5rem;
+  border-radius: 0.75rem;
+  box-shadow: 0 10px 25px -5px var(--shadow-color), 0 8px 10px -6px var(--shadow-color);
+  width: 100%;
+  max-width: 400px;
+  border: 1px solid var(--border-primary);
+}
+
+.login-title {
+  text-align: center;
+  font-size: 1.8rem;
+  font-weight: 700;
+  color: var(--text-primary);
+  margin-bottom: 2rem;
+}
+
+.input-group {
+  margin-bottom: 1.5rem;
+}
+
+.input-group label {
+  display: block;
+  margin-bottom: 0.5rem;
+  font-weight: 600;
+  color: var(--text-secondary);
+}
+
+.login-input {
+  width: 100%;
+  padding: 0.75rem 1rem;
+  border: 1px solid var(--border-secondary);
+  border-radius: 0.375rem;
+  background-color: var(--bg-secondary);
+  color: var(--text-primary);
+  font-size: 1rem;
+  transition: border-color 0.2s ease;
+}
+
+.login-input:focus {
+  outline: none;
+  border-color: var(--border-focus);
+  box-shadow: 0 0 0 2px color-mix(in srgb, var(--border-focus) 20%, transparent);
+}
+
+.login-error {
+  color: #ef4444; /* Red */
+  font-size: 0.875rem;
+  margin-bottom: 1rem;
+  text-align: center;
+}
+
+body.dark .login-error {
+  color: #fca5a5; /* Lighter red for dark mode */
+}
+
+.login-button {
+  width: 100%;
+  padding: 0.8rem 1rem;
+  font-size: 1rem;
+  font-weight: 600;
+}
+
+/* Logout Button Styles */
+.logout-btn {
+  margin-left: 0.5rem; /* Space from theme toggle */
+  background-color: transparent;
+  color: var(--text-button); /* Match nav text color */
+  border: 1px solid var(--text-button);
+  padding: 0.4rem 0.8rem;
+}
+
+body.dark .logout-btn {
+  border-color: var(--text-button);
+  color: var(--text-button);
+}
+
+.logout-btn:hover {
+  background-color: rgba(255, 255, 255, 0.1);
+}
+
+body.dark .logout-btn:hover {
+  background-color: rgba(0, 0, 0, 0.2);
+}
+
+/* Basic Loading State */
+.loading-fullscreen {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  font-size: 1.5rem;
+  color: var(--text-secondary);
+}
+
+/* Landing Page Styles */
+.landing-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 3rem 1rem;
+  min-height: 100vh;
+}
+
+.landing-header h1 {
+  font-size: 3rem;
+  font-weight: 800;
+  color: var(--text-primary);
+  margin-bottom: 0.5rem;
+}
+
+.landing-header p {
+  font-size: 1.2rem;
+  color: var(--text-tertiary);
+  margin-bottom: 2.5rem;
+}
+
+.landing-actions {
+  display: flex;
+  gap: 1rem;
+  margin-bottom: 3rem;
+}
+
+.landing-btn {
+  padding: 0.8rem 2rem;
+  font-size: 1rem;
+  font-weight: 600;
+}
+
+.landing-features {
+  margin-top: 2rem;
+  max-width: 600px;
+}
+
+.landing-features h2 {
+  font-size: 1.5rem;
+  margin-bottom: 1rem;
+  color: var(--text-secondary);
+}
+
+.landing-features ul {
+  list-style: none;
+  padding: 0;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 1rem;
+}
+
+.landing-features li {
+  background-color: var(--bg-secondary);
+  padding: 0.5rem 1rem;
+  border-radius: 0.5rem;
+  border: 1px solid var(--border-primary);
+  color: var(--text-secondary);
+}
+
+/* Signup/Login Page Specifics */
+.signup-message {
+  color: #16a34a; /* Green */
+  background-color: #dcfce7;
+  border: 1px solid #bbf7d0;
+  padding: 0.75rem;
+  border-radius: 0.375rem;
+  margin-bottom: 1rem;
+  font-size: 0.9rem;
+  text-align: center;
+}
+
+body.dark .signup-message {
+  color: #bbf7d0;
+  background-color: #14532d;
+  border-color: #16a34a;
+}
+
+.auth-link {
+  margin-top: 1.5rem;
+  text-align: center;
+  font-size: 0.9rem;
+  color: var(--text-tertiary);
+}
+
+.auth-link a {
+  font-weight: 600;
+  color: var(--text-accent);
+}
+
+/* Room Entry Page Styles */
+.room-entry-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 3rem 1rem;
+  text-align: center;
+  min-height: 80vh;
+}
+
+.room-entry-container h2 {
+  font-size: 1.8rem;
+  font-weight: 700;
+  color: var(--text-primary);
+  margin-bottom: 1.5rem;
+}
+
+.room-entry-form {
+  display: flex;
+  gap: 0.75rem;
+  margin-bottom: 1rem;
+  width: 100%;
+  max-width: 450px;
+}
+
+.room-entry-input {
+  flex-grow: 1;
+  padding: 0.75rem 1rem;
+  border: 1px solid var(--border-secondary);
+  border-radius: 0.375rem;
+  background-color: var(--bg-secondary);
+  color: var(--text-primary);
+  font-size: 1rem;
+  transition: border-color 0.2s ease;
+}
+
+.room-entry-input:focus {
+  outline: none;
+  border-color: var(--border-focus);
+  box-shadow: 0 0 0 2px color-mix(in srgb, var(--border-focus) 20%, transparent);
+}
+
+.room-entry-container p {
+  font-size: 0.9rem;
+  color: var(--text-tertiary);
+}

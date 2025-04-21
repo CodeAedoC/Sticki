@@ -1,24 +1,21 @@
 import React from 'react'
 import ReactDOM from 'react-dom/client'
-import { BrowserRouter } from 'react-router-dom'
-import { RoomProvider } from './liveblocks.config'
-import { LiveList, LiveMap } from "@liveblocks/client"
 import App from './App.jsx'
 import './index.css'
+import { BrowserRouter as Router } from 'react-router-dom'
+import { AuthProvider } from './contexts/AuthContext.jsx'
 
-ReactDOM.createRoot(document.getElementById('root')).render(
+const rootElement = document.getElementById('root');
+if (!rootElement) throw new Error("Root element not found");
+
+const root = ReactDOM.createRoot(rootElement);
+
+root.render(
   <React.StrictMode>
-    <RoomProvider
-      id="my-whiteboard-room"
-      initialPresence={{ cursor: null, color: '#000000', isDrawing: false }}
-      initialStorage={{
-        paths: new LiveList([]),
-        notes: new LiveMap()
-      }}
-    >
-      <BrowserRouter>
+    <Router>
+      <AuthProvider>
         <App />
-      </BrowserRouter>
-    </RoomProvider>
-  </React.StrictMode>,
-)
+      </AuthProvider>
+    </Router>
+  </React.StrictMode>
+);
