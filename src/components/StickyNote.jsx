@@ -125,37 +125,39 @@ function StickyNote({ id }) {
     >
       <div
         ref={nodeRef}
-        className="absolute p-2 w-40 h-40 shadow-xl flex flex-col cursor-default overflow-hidden border border-gray-300 rounded-lg bg-opacity-90 hover:scale-105 transition-transform z-10"
-        style={{ backgroundColor: note.fill || '#ffffa5' }}
+        className="absolute p-2 w-40 h-40 shadow-xl flex flex-col cursor-default overflow-hidden border border-gray-300 rounded-lg bg-opacity-90 hover:scale-105 transition-transform z-10 sticky-note"
+        style={{ backgroundColor: note.fill || 'var(--bg-note)' }}
       >
+        {/* Delete Button (Moved to top right, visible on hover) */}
+        <button
+          onClick={deleteNote}
+          className="note-delete-btn"
+          title="Delete Note"
+        >
+          ✕
+        </button>
+
         <div className="note-handle w-full h-5 bg-gray-300 bg-opacity-50 flex justify-end items-center cursor-grab mb-1 flex-shrink-0">
-          <button
-            onClick={deleteNote}
-            className="text-red-500 hover:text-red-700 font-bold px-1 text-xs"
-            title="Delete Note"
-          >
-            ✕
-          </button>
+          {/* // Conditionally render textarea or text view */}
+          {isEditing ? (
+            <textarea
+              ref={textAreaRef}
+              value={textValue}
+              onChange={handleTextChange}
+              onBlur={handleBlur}
+              onKeyDown={handleKeyDown}
+              className="flex-grow bg-transparent resize-none outline-none text-sm p-1 w-full h-full"
+              placeholder="Type here..."
+            />
+          ) : (
+            <div
+              onClick={handleContentClick} // Click note body to edit
+              className="flex-grow text-sm p-1 w-full h-full overflow-y-auto cursor-text whitespace-pre-wrap break-words"
+            >
+              {textValue || <span className="text-gray-400">Click to edit...</span>}
+            </div>
+          )}
         </div>
-        {/* // Conditionally render textarea or text view */}
-        {isEditing ? (
-          <textarea
-            ref={textAreaRef}
-            value={textValue}
-            onChange={handleTextChange}
-            onBlur={handleBlur}
-            onKeyDown={handleKeyDown}
-            className="flex-grow bg-transparent resize-none outline-none text-sm p-1 w-full h-full"
-            placeholder="Type here..."
-          />
-        ) : (
-          <div
-            onClick={handleContentClick} // Click note body to edit
-            className="flex-grow text-sm p-1 w-full h-full overflow-y-auto cursor-text whitespace-pre-wrap break-words"
-          >
-            {textValue || <span className="text-gray-400">Click to edit...</span>}
-          </div>
-        )}
       </div>
     </Draggable>
   );

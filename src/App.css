@@ -47,6 +47,8 @@
 }
 
 .app-nav {
+  display: flex;
+  align-items: center;
   background-color: #2563eb; /* bg-blue-600 */
   color: white;
   padding: 1rem; /* p-4 */
